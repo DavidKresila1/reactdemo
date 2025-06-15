@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function CreateEvent() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    title: '',
+    date: '',
+    location: '',
+    venueId: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:8080/events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+      .then((res) => res.json())
+      .then(() => {
+        alert('Event created');
+        navigate('/');
+      });
+  };
+
+  return (
+    <div>
+      <h2>Create New Event</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label><br />
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Date:</label><br />
+          <input
+            type="datetime-local"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Location:</label><br />
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Venue ID:</label><br />
+          <input
+            type="number"
+            name="venueId"
+            value={formData.venueId}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit" style={{ marginTop: '10px' }}>Create Event</button>
+      </form>
+    </div>
+  );
+}
+
+export default CreateEvent;
