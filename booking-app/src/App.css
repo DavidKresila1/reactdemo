@@ -1,0 +1,34 @@
+/* Light theme */
+.light {
+  background-color: white;
+  color: black;
+}
+
+/* Dark theme */
+.dark {
+  background-color: #222;
+  color: white;
+}
+
+/* Optional basic styling */
+header {
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: #eee;
+}
+
+nav {
+  margin: 10px 0;
+}
+
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px 10px;
+}
